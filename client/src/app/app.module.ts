@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { SDKModule } from '../sdk/index';
+import { StoreModule } from '@ngrx/store';
+import { userReducer, USER } from '../reducers/user.reducer';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -55,7 +57,8 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
-    SDKModule.forRoot()
+    SDKModule.forRoot(),
+    StoreModule.provideStore({ [USER]: userReducer })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

@@ -7,7 +7,7 @@
     "prestart": "npm prune",
     "start": "concurrently -k \"node .\" \"cd client && npm run start:hmr\"",
     "sdk": "lb-sdk server/server client/src/sdk -w",
-    "postinstall": "cd client && npm i",
+    "postinstall": "cd client && yarn",
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
@@ -29,7 +29,8 @@
     "concurrently": "^3.1.0",
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
-    "nsp": "^2.1.0"
+    "nsp": "^2.1.0",
+    "yarn": "^0.16.1"
   },
   "repository": {
     "type": "",
