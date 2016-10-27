@@ -123,7 +123,7 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          loaders: ['to-string-loader', 'css-loader']
+          loaders: ['to-string-loader', 'style-loader', 'css-loader']
         },
 
         /* Raw loader support for *.html
@@ -140,7 +140,7 @@ module.exports = function (options) {
         /* File loader for supporting images, for example, in CSS files.
          */
         {
-          test: /\.(jpg|png|gif)$/,
+          test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
           loader: 'file'
         },
 

@@ -3,15 +3,6 @@
     "name": "db",
     "connector": "memory"
   },
-  "mongodb_dev": {
-    "host": "127.0.0.1",
-    "port": 27017,
-    "database": "devDB",
-    "username": "",
-    "password": "",
-    "name": "mongodb_dev",
-    "connector": "mongodb"
-  },
   "mongodb_remote": {
     "host": "37.59.48.5",
     "port": 27018,

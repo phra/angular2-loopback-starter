@@ -18,6 +18,8 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { LoginComponent } from './login';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { SignupFormComponent } from './login/signup-form/signup-form.component';
 import { NoContentComponent } from './no-content';
 import { XLarge } from './home/x-large';
 
@@ -43,6 +45,8 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     LoginComponent,
+    SignupFormComponent,
+    LoginFormComponent,
     NoContentComponent,
     XLarge
   ],

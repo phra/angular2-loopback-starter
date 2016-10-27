@@ -17,12 +17,8 @@ console.log('`Login` component loaded asynchronously');
   styles: [`
   `],
   template: `
-    <div>
-      <h1>Login</h1>
-      <input type="text" name="user.username" [(ngModel)]="user.username">
-      <input type="password" name="user.password" [(ngModel)]="user.password">
-      <button (click)="login()">LOGIN</button>
-    </div>
+    <login-form (tryLogin)="login($event)" ></login-form>
+    <signup-form (trySignup)="signup($event)" ></signup-form>
   `
 })
 export class LoginComponent {
@@ -47,14 +43,16 @@ export class LoginComponent {
     console.log('hello `Login` component');
   }
     // Start making API calls right away
-  private signup(): void {
-    this.usersApi.create(this.user).subscribe((user: Users) => (this.user = user) && this.login());
+  private signup(user: Users): void {
+    this.usersApi.create(this.user).subscribe((user: Users) => (this.user = user) && this.login(user));
   }
 
   // Built-in LoopBack Authentication accountApiand Typings like Account and TokenInterface
-  private login(): void {
+  private login(user: Users): void {
     console.log('login');
     this.productsApi.findOne().subscribe(console.log);
-    this.usersApi.login(this.user).subscribe((token: AccessToken) => alert('Fake Redirect'));
+    this.usersApi.login(user).subscribe((token: AccessToken) => alert('Fake Redirect'));
   }
+
+
 }

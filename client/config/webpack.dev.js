@@ -10,9 +10,9 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
  * Webpack Plugins
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 
 /**
  * Webpack Constants
@@ -104,7 +104,10 @@ module.exports = function (options) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
-        }
+        },
+      }),
+      new ProvidePlugin({
+        jQuery: 'jquery',
       }),
 
       /**
@@ -138,7 +141,6 @@ module.exports = function (options) {
 
         }
       }),
-      new DashboardPlugin(),
 
     ],
 
