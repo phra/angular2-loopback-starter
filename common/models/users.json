@@ -1,16 +1,12 @@
 {
-  "name": "Account",
-  "plural": "Accounts",
+  "name": "users",
+  "plural": "userss",
   "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "age": {
-      "type": "number"
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {},
   "acls": [],

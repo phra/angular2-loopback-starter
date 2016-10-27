@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoopBackConfig } from '../../sdk/index';
 import { BASE_URL, API_VERSION } from '../environment';
-import { Account, AccessToken } from '../../sdk/models';
-import { AccountApi, UserApi } from '../../sdk/services';
+import { Account, AccessToken, Products, Users } from '../../sdk/models';
+import { AccountApi, UserApi, ProductsApi, UsersApi } from '../../sdk/services';
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -19,8 +19,8 @@ console.log('`Login` component loaded asynchronously');
   template: `
     <div>
       <h1>Login</h1>
-      <input type="text" name="account.username" [(ngModel)]="account.username">
-      <input type="password" name="account.password" [(ngModel)]="account.password">
+      <input type="text" name="user.username" [(ngModel)]="user.username">
+      <input type="password" name="user.password" [(ngModel)]="user.password">
       <button (click)="login()">LOGIN</button>
     </div>
   `
@@ -29,10 +29,10 @@ export class LoginComponent {
 
   localState: any;
   // Create model instances and set the right type effortless
-  private account: Account = new Account();
+  private user: Users = new Users();
 
   // Configure LoopBack Once or Individually by Component
-  constructor(public route: ActivatedRoute, private accountApi: AccountApi) {
+  constructor(public route: ActivatedRoute, private usersApi: UsersApi, private productsApi: ProductsApi) {
       LoopBackConfig.setBaseURL(BASE_URL);
       LoopBackConfig.setApiVersion(API_VERSION);
   }
@@ -48,12 +48,13 @@ export class LoginComponent {
   }
     // Start making API calls right away
   private signup(): void {
-    this.accountApi.create(this.account).subscribe((account: Account) => (this.account = account) && this.login());
+    this.usersApi.create(this.user).subscribe((user: Users) => (this.user = user) && this.login());
   }
 
-  // Built-in LoopBack Authentication and Typings like Account and TokenInterface
+  // Built-in LoopBack Authentication accountApiand Typings like Account and TokenInterface
   private login(): void {
     console.log('login');
-    this.accountApi.login(this.account).subscribe((token: AccessToken) => alert('Fake Redirect'));
+    this.productsApi.findOne().subscribe(console.log);
+    this.usersApi.login(this.user).subscribe((token: AccessToken) => alert('Fake Redirect'));
   }
 }

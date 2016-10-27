@@ -1,14 +1,15 @@
 {
-  "name": "Account",
-  "plural": "Accounts",
-  "base": "User",
+  "name": "products",
+  "plural": "productss",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "age": {
-      "type": "number"
+    "name": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
