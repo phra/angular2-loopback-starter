@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoopBackConfig } from '../../sdk/index';
 import { BASE_URL, API_VERSION } from '../environment';
@@ -20,17 +20,18 @@ console.log('`Login` component loaded asynchronously');
   selector: 'login',
   styles: [`
   `],
+  encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <login-form (tryLogin)="login($event)" ></login-form>
-    <signup-form (trySignup)="signup($event)" ></signup-form>
+    <login-form (tryLogin)="login($event)" (tryLogout)="logout($event)" [loggedUser]="user1 | async"></login-form>
+    <signup-form (trySignup)="signup($event)"></signup-form>
     {{ user1 | async | json }}
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
 
   localState: any;
   // Create model instances and set the right type effortless
-  private user: Users = new Users();
   private user1: Observable<Users>;
 
   // Configure LoopBack Once or Individually by Component
@@ -51,13 +52,16 @@ export class LoginComponent {
   }
     // Start making API calls right away
   private signup(user: Users): void {
-    this.usersApi.create(this.user).subscribe((user: Users) => (this.user = user) && this.login(user));
+    this.usersApi.create(user).subscribe((user: Users) => this.login(user));
   }
 
   // Built-in LoopBack Authentication accountApiand Typings like Account and TokenInterface
   private login(user: Users): void {
-    console.log('login');
     this.usersApi.login(user).subscribe((token: AccessToken) => alert('Fake Redirect') || this.store.dispatch({ type: LOGIN, payload: token.user }));
     this.productsApi.findOne().subscribe(console.log);
+  }
+
+  private logout(): void {
+    this.usersApi.logout().subscribe( () => this.store.dispatch({ type: LOGOUT }));
   }
 }

@@ -18,7 +18,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-
+const autoprefixer = require('autoprefixer');
 /*
  * Webpack Constants
  */
@@ -123,7 +123,19 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          loaders: ['to-string-loader', 'style-loader', 'css-loader']
+          use: [
+            {
+              loader: 'raw-loader'
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                options: { /* PostCSS Options */ },
+                plugins: () => [ autoprefixer({ browsers: ['last 2 versions', 'Firefox ESR'] }) ]
+              }
+            }
+          ],
+          //loaders: ['raw-loader', 'postcss-loader']
         },
 
         /* Raw loader support for *.html

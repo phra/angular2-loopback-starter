@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { SDKModule } from '../sdk/index';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { userReducer, USER } from '../reducers/user.reducer';
 
 /*
@@ -37,6 +38,11 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
+console.log(ENV);
+const metaReducers = ENV === 'development' ?
+  [StoreModule.provideStore({ [USER]: userReducer }), StoreDevtoolsModule.instrumentOnlyWithExtension()]
+     : [StoreModule.provideStore({ [USER]: userReducer })];
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -58,7 +64,7 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
     SDKModule.forRoot(),
-    StoreModule.provideStore({ [USER]: userReducer })
+    ...metaReducers
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

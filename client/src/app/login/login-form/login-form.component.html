@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(form)" novalidate #form="ngForm">
+<form *ngIf="!loggedUser.username" (ngSubmit)="onSubmitLogin(form1)" novalidate #form1="ngForm">
   <div class="form-group">
     <label>username</label>
     <input type="email" class="form-control" #emailField="ngModel"
@@ -14,5 +14,13 @@
       class="alert alert-danger">Please enter a password</p>
   </div>
   <button type="submit" class="btn btn-primary"
-    [disabled]="form.invalid">Login</button>
+    [disabled]="form1.invalid">Login</button>
+</form>
+
+<form *ngIf="loggedUser.username" (ngSubmit)="onSubmitLogout(form2)" novalidate #form2="ngForm">
+  <div class="form-group">
+    Welcome back, {{ loggedUser.username }}!
+    <button type="submit" class="btn btn-primary"
+    [disabled]="form2.invalid">Logout</button>
+  </div>
 </form>

@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint .",
     "prestart": "npm prune",
-    "start": "concurrently -k \"node .\" \"cd client && npm run start:hmr\"",
+    "start": "concurrently -k \"node .\" \"cd client; npm run start:hmr\"",
     "sdk": "lb-sdk server/server client/src/sdk -w",
     "postinstall": "cd client && yarn",
     "posttest": "npm run lint && nsp check"

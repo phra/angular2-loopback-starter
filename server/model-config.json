@@ -14,7 +14,7 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb_remote"
+    "dataSource": "db"
   },
   "AccessToken": {
     "dataSource": "db",
@@ -33,15 +33,15 @@
     "public": false
   },
   "Account": {
-    "dataSource": "mongodb_remote",
+    "dataSource": "db",
     "public": true
   },
-  "users": {
-    "dataSource": "mongodb_remote",
+  "Users": {
+    "dataSource": "db",
     "public": true
   },
   "products": {
-    "dataSource": "mongodb_remote",
+    "dataSource": "db",
     "public": true
   }
 }
