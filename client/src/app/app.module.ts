@@ -18,6 +18,8 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from '../effects/user.effect';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { LoginComponent } from './login';
@@ -63,6 +65,7 @@ const metaReducers = ENV === 'development' ?
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
+    EffectsModule.run(UserEffects),
     SDKModule.forRoot(),
     ...metaReducers
   ],

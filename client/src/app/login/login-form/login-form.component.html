@@ -1,8 +1,8 @@
-<form *ngIf="!loggedUser.username" (ngSubmit)="onSubmitLogin(form1)" novalidate #form1="ngForm">
+<form *ngIf="!loggedUser" (ngSubmit)="onSubmitLogin(form1)" novalidate #form1="ngForm">
   <div class="form-group">
-    <label>username</label>
+    <label>Email</label>
     <input type="email" class="form-control" #emailField="ngModel"
-      [(ngModel)]="user.username" name="email" required pattern=".+@.+">
+      [(ngModel)]="user.email" name="email" required pattern=".+@.+\..+">
     <p *ngIf="emailField.touched && emailField.invalid"
       class="alert alert-danger">Please enter a valid email</p>
   </div>
@@ -17,7 +17,7 @@
     [disabled]="form1.invalid">Login</button>
 </form>
 
-<form *ngIf="loggedUser.username" (ngSubmit)="onSubmitLogout(form2)" novalidate #form2="ngForm">
+<form *ngIf="loggedUser" (ngSubmit)="onSubmitLogout(form2)" novalidate #form2="ngForm">
   <div class="form-group">
     Welcome back, {{ loggedUser.username }}!
     <button type="submit" class="btn btn-primary"

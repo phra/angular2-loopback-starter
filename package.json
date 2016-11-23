@@ -4,9 +4,9 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
-    "prestart": "npm prune",
+    "prestart": "npm prune; npm run sdk",
     "start": "concurrently -k \"node .\" \"cd client; npm run start:hmr\"",
-    "sdk": "lb-sdk server/server client/src/sdk -w",
+    "sdk": "lb-sdk -w enabled server/server client/src/sdk",
     "postinstall": "cd client && yarn",
     "posttest": "npm run lint && nsp check"
   },
@@ -29,8 +29,7 @@
     "concurrently": "^3.1.0",
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
-    "nsp": "^2.1.0",
-    "yarn": "^0.16.1"
+    "nsp": "^2.1.0"
   },
   "repository": {
     "type": "",

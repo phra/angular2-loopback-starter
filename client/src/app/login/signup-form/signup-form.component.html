@@ -1,9 +1,8 @@
-
-<form (ngSubmit)="onSubmit(form)" novalidate #form="ngForm">
+<form *ngIf="!loggedUser" (ngSubmit)="onSubmit(form)" novalidate #form="ngForm">
   <div class="form-group">
     <label>Username</label>
     <input type="email" class="form-control" #emailField="ngModel"
-      [(ngModel)]="user.username" name="email" required pattern=".+@.+">
+      [(ngModel)]="user.email" name="email" required pattern=".+@.+">
     <p *ngIf="emailField.touched && emailField.invalid"
       class="alert alert-danger">Please enter a valid email</p>
   </div>

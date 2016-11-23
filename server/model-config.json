@@ -36,10 +36,6 @@
     "dataSource": "db",
     "public": true
   },
-  "Users": {
-    "dataSource": "db",
-    "public": true
-  },
   "products": {
     "dataSource": "db",
     "public": true
